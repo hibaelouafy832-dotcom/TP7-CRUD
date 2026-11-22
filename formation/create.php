@@ -4,8 +4,8 @@ require_once "../database/connexion.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $nom_formation = $_POST["nom_formation"];
-    $description = $_POST["description"];
+    $nom_formation = trim($_POST["nom_formation"]);
+    $description = trim($_POST["description"]);
     $duree = $_POST["duree"];
 
     $sql = "INSERT INTO Formation (nom_formation, description, duree)
@@ -28,31 +28,174 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une formation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduManage - Ajouter une formation</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-    <h1>Ajouter une formation</h1>
+    <aside class="sidebar">
 
-    <form method="POST">
+        <a href="../index.php" class="sidebar-brand">
+            Edu<span>Manage</span>
+        </a>
 
-        <label>Nom de la formation :</label>
-        <input type="text" name="nom_formation" required>
-        <br><br>
+        <p class="sidebar-label">MENU PRINCIPAL</p>
 
-        <label>Description :</label>
-        <textarea name="description"></textarea>
-        <br><br>
+        <nav class="nav flex-column">
 
-        <label>Durée (mois) :</label>
-        <input type="number" name="duree" required>
-        <br><br>
+            <a href="../index.php" class="nav-link">
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span>Dashboard</span>
+            </a>
 
-        <button type="submit">Ajouter</button>
+            <a href="index.php" class="nav-link active">
+                <i class="bi bi-mortarboard-fill"></i>
+                <span>Formations</span>
+            </a>
 
-    </form>
+            <a href="../etudiant/index.php" class="nav-link">
+                <i class="bi bi-people-fill"></i>
+                <span>Étudiants</span>
+            </a>
 
-    <a href="index.php">Retour à la liste</a>
+            <a href="../module/index.php" class="nav-link">
+                <i class="bi bi-journal-bookmark-fill"></i>
+                <span>Modules</span>
+            </a>
+
+        </nav>
+
+        <div class="mt-auto">
+            <p class="sidebar-label">GESTION</p>
+
+            <a href="../index.php" class="nav-link">
+                <i class="bi bi-house-fill"></i>
+                <span>Accueil</span>
+            </a>
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1 class="page-title">Nouvelle formation</h1>
+                <p class="page-subtitle">
+                    Ajoutez une nouvelle formation à votre établissement.
+                </p>
+            </div>
+
+            <a href="index.php" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>
+                Retour
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="content-card">
+
+                    <div class="d-flex align-items-center gap-3 mb-4">
+
+                        <div class="rounded-3 p-3" style="background:#E9E5F5;color:#39345C;">
+                            <i class="bi bi-mortarboard-fill fs-3"></i>
+                        </div>
+
+                        <div>
+                            <h2 class="fs-5 fw-bold mb-1">
+                                Informations de la formation
+                            </h2>
+
+                            <p class="text-secondary small mb-0">
+                                Remplissez les champs ci-dessous.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <hr style="border-color:#ECE9F3;">
+
+                    <form method="POST">
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Nom de la formation
+                            </label>
+
+                            <input
+                                type="text"
+                                name="nom_formation"
+                                class="form-control"
+                                placeholder="Ex : Développement Web"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Description
+                            </label>
+
+                            <textarea
+                                name="description"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Décrivez brièvement cette formation..."
+                            ></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Durée (mois)
+                            </label>
+
+                            <input
+                                type="number"
+                                name="duree"
+                                class="form-control"
+                                placeholder="Ex : 12"
+                                min="1"
+                                required
+                            >
+                        </div>
+
+                        <hr style="border-color:#ECE9F3;">
+
+                        <div class="d-flex justify-content-end gap-2">
+
+                            <a href="index.php" class="btn btn-outline-secondary">
+                                Annuler
+                            </a>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>
+                                Enregistrer la formation
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer>
+            © 2026 EduManage - Tous droits réservés
+        </footer>
+
+    </main>
 
 </body>
 </html>
